@@ -34,6 +34,7 @@ function guessChecker() {
 		return something
 		.append something to change CSS?
 		(Congrats ${player}!)
+		.append <button id="something">Play Again?</button>
 	} 
 	if (guess != correct answer) {
 	  display a sad message
@@ -47,7 +48,7 @@ let roundOfGame = 1
 roundOfGame++
 
 
-```
+
 
 
 Random number generator

@@ -13,15 +13,30 @@
 <body>
     <h1>YOUR GAME HERE!</h1>
     
-  <div id="inputs">
-    <input id="player-one" placeholder="Guess (1-25)" type="number">
-    <input id="player-two" placeholder="Guess (1-25)" type="number">
+  <span id="player-guess">
+    <input class="player-one" placeholder="Guess (1-25)" type="number">
+    <input class="player-two" placeholder="Guess (1-25)" type="number">
     <button id="submit-button">Submit Guesses</button>
-  </div>
+  </span>
 
+  
+  
   <div id="display-area">
-    <h3>Number of rounds</h3>
-    <h3>Answer</h3>
+    <h3>Number of rounds ${placeholderVariable}</h3>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Answer</th>
+          <th>Player One</th>
+          <th>Player Two</th>
+        </tr>
+      </thead>
+
+      <tbody id="table-body">
+        <!-- appended guesses here! -->
+      </tbody>
+    </table>
 
   </div>
     
