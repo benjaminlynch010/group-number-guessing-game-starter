@@ -2,11 +2,15 @@ $(document).ready(handleReady);
 
 function handleReady() {
   console.log("jquery is loaded!")
-  $('#submit-button').on('click',handleSubmit);
+  $('#submit-button').on('click', handleSubmit);
+  $('#restart-button').on('click', handleRestart)
 }
 
 // global variables
 let correctAnswer = 0
+
+// Total Guess Syntax
+let guessCount = 0;
 
 
 function handleSubmit(){
@@ -14,6 +18,11 @@ let guessOne = Number($('.player-one').val())
 // console.log(guessOne)
 let guessTwo = Number($('.player-two').val())
 // console.log(guessTwo)
+
+guessCount++
+console.log('Guess Count', guessCount);
+
+$('#guessArea').text('Guess Count: ' + guessCount);
 
 $('#table-body').append(`
   <tr>
@@ -37,19 +46,24 @@ console.log(correctAnswer)
 
 function checkGuess(num1, num2) {
   if (num1 == correctAnswer) {
-    console.log(`Player One wins! Guess: ${num1} Answer: ${correctAnswer}`)
+    $('#winnerDiv').append(`Player One wins! Guess: ${num1} Answer: ${correctAnswer}`)
+    //crazy Css here
   }
   else if (num2 == correctAnswer) {
-    console.log(`Player Two wins! Guess: ${num2} Answer: ${correctAnswer}`)
+    $('#winnerDiv').append(`Player Two wins! Guess: ${num2} Answer: ${correctAnswer}`)
+    //crazy Css here
   }
   else {
+
+    $('#playerOneTooLowHigh').text(" ")
+    $('#playerTwoTooLowHigh').text(" ")
     // player one
-    highOrLow(num1, correctAnswer)
-    console.log('Player One:',)
+    highOrLowOne(num1, correctAnswer)
+    $('#playerOneTooLowHigh').prepend('Player One:')
     
     //player two
-    highOrLow(num2, correctAnswer)
-    console.log('Player Two:')
+    highOrLowTwo(num2, correctAnswer)
+    $("#playerTwoTooLowHigh").prepend('Player Two:')
 
 
     console.log('Play Again???')
@@ -58,12 +72,32 @@ function checkGuess(num1, num2) {
   // append play again button here!
 } // end checkGuess
 
-function highOrLow(guess, answer) {
+function highOrLowOne(guess, answer) {
   if (guess > answer) {
-    console.log('Too High!')
+    $('#playerOneTooLowHigh').append('Too High!');
 
   }
   if (guess < answer) {
-    console.log('Too Low!')
+    $('#playerOneTooLowHigh').append('Too Low!')
   }
+}
+
+function highOrLowTwo(guess, answer) {
+  if (guess > answer) {
+    $("#playerTwoTooLowHigh").append('Too High!')
+
+  }
+  if (guess < answer) {
+    $("#playerTwoTooLowHigh").append('Too Low!')
+  }
+}
+
+function handleRestart(event) {
+  event.preventDefault()
+  console.log('restart button working')
+ 
+ $('#winnerDiv, #table-body, #high-low').text('')
+ randomNumberGenerator(25)
+ console.log(correctAnswer)
+ guessCount = 0
 }
